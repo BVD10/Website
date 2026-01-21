@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Choose your path to success">
+    <title>Growth Bloc - Choose Your Path</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #000000;
+            --text-white: #ffffff;
+            --accent-yellow: #d4ff00;
+            --accent-blue: #60a5fa;
+            --accent-green: #34d399;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(30px, -30px); }
+            66% { transform: translate(-20px, 20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        html, body {
+            overflow: hidden;
+            height: 100vh;
+            width: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-white);
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            background: linear-gradient(135deg, #000000 0%, #0a0a1a 25%, #000000 50%, #1a0a1a 75%, #000000 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            overflow: hidden;
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(212, 255, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(96, 165, 250, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(52, 211, 153, 0.03) 0%, transparent 40%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        /* Floating Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            animation: floatSlow 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 255, 0, 0.3) 0%, transparent 70%);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(96, 165, 250, 0.3) 0%, transparent 70%);
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 7s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(52, 211, 153, 0.2) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 3s;
+        }
+
+        /* Container */
+        .qualifier-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        /* Content */
+        .content {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        /* Logo Section */
+        .logo-section {
+            margin-bottom: 3rem;
+            animation: fadeInScale 1s ease;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(212, 255, 0, 0.3));
+        }
+
+        /* Main Question */
+        .main-question {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .main-question .highlight {
+            background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 4rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        /* Button Container */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        /* Choice Buttons */
+        .choice-btn {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            padding: 2.5rem 3rem;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Shimmer effect */
+        .choice-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transition: left 0.7s ease;
+        }
+
+        .choice-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Glow effect background */
+        .choice-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .choice-btn:hover::after {
+            width: 500px;
+            height: 500px;
+        }
+
+        .choice-btn:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .choice-btn:active {
+            transform: translateY(-5px) scale(1.01);
+        }
+
+        .btn-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .choice-btn:hover .btn-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .btn-label {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Specific Button Colors */
+        .sales-rep-btn:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 20px 60px rgba(96, 165, 250, 0.3);
+        }
+
+        .sales-rep-btn:hover .btn-label {
+            color: var(--accent-blue);
+        }
+
+        .business-owner-btn:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 20px 60px rgba(52, 211, 153, 0.3);
+        }
+
+        .business-owner-btn:hover .btn-label {
+            color: var(--accent-green);
+        }
+
+        /* Pill Badge */
+        .pill-badge {
+            display: inline-block;
+            background: rgba(212, 255, 0, 0.1);
+            border: 1px solid rgba(212, 255, 0, 0.3);
+            color: var(--accent-yellow);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.8s backwards;
+        }
+
+        /* Loading Animation */
+        .content.loading {
+            animation: pulse 0.5s ease;
+        }
+
+        @keyframes loadingPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-question {
+                font-size: 3rem;
+            }
+
+            .orb-1, .orb-2, .orb-3 {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Simplify background for mobile */
+            .animated-bg {
+                background: #000000 !important;
+                animation: none !important;
+            }
+
+            .animated-bg::before {
+                display: none !important;
+            }
+
+            .orb {
+                display: none;
+            }
+
+            .main-question {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 3rem;
+            }
+
+            .logo-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+            }
+
+            .btn-label {
+                font-size: 1.5rem;
+            }
+
+            .btn-description {
+                font-size: 0.95rem;
+            }
+
+            .btn-icon {
+                font-size: 2.5rem;
+            }
+
+            .choice-btn {
+                padding: 2rem 2rem;
+            }
+
+            .button-container {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                padding: 20px 15px;
+            }
+
+            .main-question {
+                font-size: 1.8rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .logo-section {
+                margin-bottom: 2rem;
+            }
+
+            .button-container {
+                gap: 1.2rem;
+            }
+
+            .choice-btn {
+                padding: 1.5rem 1.5rem;
+            }
+
+            .btn-icon {
+                font-size: 2rem;
+            }
+
+            .btn-label {
+                font-size: 1.3rem;
+            }
+
+            .btn-description {
+                font-size: 0.85rem;
+            }
+
+            .pill-badge {
+                font-size: 0.8rem;
+                padding: 0.4rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="qualifier-container">
+        <div class="content">
+            <div class="logo-section">
+                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#d4ff00;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#60a5fa;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M50 10 L90 50 L50 90 L10 50 Z" fill="url(#logoGrad)"/>
+                </svg>
+                <div class="logo-text">Growth Bloc</div>
+            </div>
+
+            <div class="pill-badge">🚀 Choose Your Path</div>
+
+            <h1 class="main-question">
+                Are You a <span class="highlight">Sales Rep</span><br>
+                or <span class="highlight">Business Owner</span>?
+            </h1>
+
+            <p class="subtitle">Select your journey to unlock your potential</p>
+
+            <div class="button-container">
+                <button class="choice-btn sales-rep-btn" onclick="navigateToPath('sales-rep')">
+                    <div class="btn-icon">🎯</div>
+                    <span class="btn-label">Sales Rep</span>
+                    <span class="btn-description">Master high-ticket sales & achieve freedom</span>
+                </button>
+
+                <button class="choice-btn business-owner-btn" onclick="navigateToPath('business-owner')">
+                    <div class="btn-icon">💼</div>
+                    <span class="btn-label">Business Owner</span>
+                    <span class="btn-description">Grow your business & scale your team</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation function for qualifier page
+        function navigateToPath(pathType) {
+            const content = document.querySelector('.content');
+            content.classList.add('loading');
+
+            // ⚠️ IMPORTANT: Update these URLs with your actual GoHighLevel page URLs
+            setTimeout(() => {
+                if (pathType === 'sales-rep') {
+                    // Replace with your Sales Rep page URL
+                    window.location.href = 'sales-rep-complete.html'; // Change this to your actual URL
+                } else if (pathType === 'business-owner') {
+                    // Replace with your Business Owner page URL
+                    window.location.href = 'business-owner-complete.html'; // Change this to your actual URL
+                }
+            }, 300);
+        }
+
+        // Add keyboard support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '1') {
+                navigateToPath('sales-rep');
+            } else if (e.key === '2') {
+                navigateToPath('business-owner');
+            }
+        });
+
+        // Enhanced hover effects with parallax
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.choice-btn');
+            const container = document.querySelector('.qualifier-container');
+
+            // Mouse parallax effect
+            container.addEventListener('mousemove', function(e) {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+
+                buttons.forEach(button => {
+                    if (!button.matches(':hover')) {
+                        button.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+                    }
+                });
+            });
+
+            // Reset transform on mouse leave
+            container.addEventListener('mouseleave', function() {
+                buttons.forEach(button => {
+                    button.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+                });
+            });
+
+            // Button hover animations
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+
+        // Animate elements on scroll (for mobile)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.choice-btn').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
