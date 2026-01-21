@@ -1038,6 +1038,19 @@
                 border-left: none !important;
                 border-right: none !important;
             }
+
+            /* Fix centering for play buttons and video content */
+            .hero-video-content,
+            .hero-play-button,
+            .play-button {
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+
+            .hero-video-content {
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+            }
         }
 
         @media (max-width: 480px) {
