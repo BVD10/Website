@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Choose your path to success">
+    <title>Growth Bloc - Choose Your Path</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Qualifier Container */
+        .qualifier-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Background Image */
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:rgb(20,20,20);stop-opacity:1" /><stop offset="100%" style="stop-color:rgb(40,40,40);stop-opacity:1" /></linearGradient></defs><ellipse cx="600" cy="400" rx="500" ry="300" fill="url(%23grad)" opacity="0.3"/></svg>');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        .background-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 2;
+        }
+
+        /* Content Container */
+        .content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+            animation: fadeIn 1s ease;
+        }
+
+        /* Logo Section */
+        .logo-section {
+            margin-bottom: 3rem;
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Main Question */
+        .main-question {
+            font-size: 2.8rem;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+            font-weight: 400;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        /* Button Container */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        /* Choice Buttons */
+        .choice-btn {
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            overflow: hidden;
+        }
+
+        .choice-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .choice-btn:hover::before {
+            left: 100%;
+        }
+
+        .choice-btn:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .choice-btn:active {
+            transform: translateY(-2px);
+        }
+
+        .btn-label {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-description {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+        }
+
+        /* Specific Button Styles */
+        .sales-rep-btn:hover {
+            border-color: #60a5fa;
+            background: rgba(96, 165, 250, 0.15);
+        }
+
+        .business-owner-btn:hover {
+            border-color: #34d399;
+            background: rgba(52, 211, 153, 0.15);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Loading Animation */
+        .content.loading {
+            animation: pulse 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-question {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .btn-label {
+                font-size: 1.2rem;
+            }
+
+            .btn-description {
+                font-size: 0.85rem;
+            }
+
+            .choice-btn {
+                padding: 1.2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-question {
+                font-size: 1.6rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 2rem;
+            }
+
+            .icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .logo-section {
+                margin-bottom: 2rem;
+            }
+
+            .button-container {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="qualifier-container">
+        <div class="background-image"></div>
+
+        <div class="content">
+            <div class="logo-section">
+                <svg class="icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 10 L90 50 L50 90 L10 50 Z" fill="white"/>
+                </svg>
+            </div>
+
+            <h1 class="main-question">Are You a Sales Rep or Business Owner?</h1>
+
+            <p class="subtitle">Choose your path to success</p>
+
+            <div class="button-container">
+                <button class="choice-btn sales-rep-btn" onclick="navigateToPath('sales-rep')">
+                    <span class="btn-label">Sales Rep</span>
+                    <span class="btn-description">Master high-ticket sales & achieve freedom</span>
+                </button>
+
+                <button class="choice-btn business-owner-btn" onclick="navigateToPath('business-owner')">
+                    <span class="btn-label">Business Owner</span>
+                    <span class="btn-description">Grow your business & scale your team</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation function for qualifier page
+        function navigateToPath(pathType) {
+            const content = document.querySelector('.content');
+            content.classList.add('loading');
+
+            // ⚠️ IMPORTANT: Update these URLs with your actual GoHighLevel page URLs
+            setTimeout(() => {
+                if (pathType === 'sales-rep') {
+                    // Replace with your Sales Rep page URL
+                    window.location.href = 'sales-rep-complete.html'; // Change this to your actual URL
+                } else if (pathType === 'business-owner') {
+                    // Replace with your Business Owner page URL
+                    window.location.href = 'business-owner-complete.html'; // Change this to your actual URL
+                }
+            }, 300);
+        }
+
+        // Add keyboard support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '1') {
+                navigateToPath('sales-rep');
+            } else if (e.key === '2') {
+                navigateToPath('business-owner');
+            }
+        });
+
+        // Add hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.choice-btn');
+
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
