@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master high-ticket sales and achieve freedom">
+    <title>Growth Bloc - Elite Sales Training</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #000000;
+            --bg-card: #0f0f0f;
+            --text-white: #ffffff;
+            --text-gray: #888888;
+            --text-fade: #3a3a3a;
+            --accent-yellow: #d4ff00;
+            --accent-blue: #00d4ff;
+            --gradient-1: linear-gradient(135deg, #0a1628 0%, #1a2f4f 100%);
+            --gradient-2: linear-gradient(135deg, #1a0f2e 0%, #2f1a4f 100%);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #000000 0%, #0a0a1a 25%, #000000 50%, #1a0a1a 75%, #000000 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 20% 50%, rgba(212, 255, 0, 0.03) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.03) 0%, transparent 50%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(15, 15, 15, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            border-color: rgba(212, 255, 0, 0.3);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-white);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-yellow);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .cta-nav {
+            background: var(--accent-yellow);
+            color: var(--bg-dark) !important;
+            padding: 0.7rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 255, 0, 0.4);
+        }
+
+        .cta-nav::after {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-white);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+        }
+
+        .hero-tagline {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-title {
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            line-height: 1;
+            letter-spacing: -3px;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .hero-subtitle .fade {
+            color: var(--text-fade);
+        }
+
+        .hero-subtitle .bold {
+            color: var(--text-white);
+            font-weight: 600;
+        }
+
+        /* Pill Badge */
+        .pill-badge {
+            display: inline-block;
+            background: rgba(212, 255, 0, 0.1);
+            border: 1px solid rgba(212, 255, 0, 0.3);
+            color: var(--accent-yellow);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-tagline {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: var(--gradient-1);
+            background-size: 200% 200%;
+            padding: 3rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            animation: fadeInUp 1s ease backwards;
+        }
+
+        .feature-card:nth-child(1) {
+            background: var(--gradient-1);
+            animation-delay: 0.1s;
+        }
+
+        .feature-card:nth-child(2) {
+            background: var(--gradient-2);
+            animation-delay: 0.2s;
+        }
+
+        .feature-card:nth-child(3) {
+            background: var(--gradient-1);
+            animation-delay: 0.3s;
+        }
+
+        .feature-card:nth-child(4) {
+            background: var(--gradient-2);
+            animation-delay: 0.4s;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: translate(-25%, -25%);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212, 255, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-number {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.05);
+            line-height: 1;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(212, 255, 0, 0.1);
+            border: 1px solid rgba(212, 255, 0, 0.3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .feature-badge {
+            display: inline-block;
+            background: rgba(212, 255, 0, 0.15);
+            border: 1px solid rgba(212, 255, 0, 0.4);
+            color: var(--accent-yellow);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 20px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212, 255, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-placeholder {
+            position: relative;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(212, 255, 0, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .video-placeholder:hover::before {
+            opacity: 1;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--bg-dark);
+            transition: all 0.3s;
+            z-index: 2;
+        }
+
+        .video-placeholder:hover .play-button {
+            transform: scale(1.2);
+            box-shadow: 0 10px 40px rgba(212, 255, 0, 0.4);
+        }
+
+        .testimonial-text {
+            padding: 2.5rem;
+        }
+
+        .testimonial-text p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-text strong {
+            color: var(--accent-yellow);
+            font-weight: 600;
+        }
+
+        .testimonial-author {
+            font-size: 0.9rem;
+            color: var(--text-fade);
+            font-style: italic;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 150px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(212, 255, 0, 0.05) 0%, transparent 70%);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section h2 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+
+        .cta-section h2 .fade {
+            color: var(--text-fade);
+        }
+
+        .cta-section h2 .highlight {
+            background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-yellow);
+            color: var(--bg-dark);
+            padding: 1.3rem 3.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            border: 2px solid var(--accent-yellow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(212, 255, 0, 0.4);
+            background: transparent;
+            color: var(--accent-yellow);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-card);
+            padding: 4rem 20px 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-fade);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .cta-section h2 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 90px;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+                border-radius: 20px;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .navbar {
+                width: 95%;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .features-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">GROWTH BLOC</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#testimonials">Success Stories</a></li>
+                <li><a href="#cta" class="cta-nav">Apply Now</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <p class="hero-tagline">FOR THE FEW WHO MOVE THE MANY</p>
+            <h1 class="hero-title">
+                Level Up and<br>
+                <span class="highlight">Go Remote</span>
+            </h1>
+            <p class="hero-subtitle">
+                <span class="fade">Earn from anywhere and build a life on</span> <span class="bold">your terms</span><span class="fade">.</span>
+            </p>
+            <div class="pill-badge">🚀 90-Day Career Launch Program</div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tagline">WHAT YOU GET</p>
+                <h2 class="section-title">The Highest Level of<br>Elite Sales Training</h2>
+                <p class="section-subtitle">A dedicated pathway shapes every decision, accelerates every step, and removes every obstacle</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-number">01</div>
+                    <div class="feature-icon">🎯</div>
+                    <h3>Skills Lab</h3>
+                    <div class="feature-badge">Daily practice, instant feedback</div>
+                    <p>Daily live practice for DMs and calls. Objection frameworks, tonality drills, and graded roleplays with clear scoring and feedback. Learn the fundamentals, then sharpen them with reps that mirror real conversations.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-number">02</div>
+                    <div class="feature-icon">💰</div>
+                    <h3>Earn While You Learn</h3>
+                    <div class="feature-badge">Real income, real experience</div>
+                    <p>You can begin with appointment setting so you can earn as you go. Real conversations teach you the market, the language, and how to handle pushback. Those reps make closing feel natural when you step up to the call.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-number">03</div>
+                    <div class="feature-icon">🎓</div>
+                    <h3>Role Pathway</h3>
+                    <div class="feature-badge">Interview ready in 90 days</div>
+                    <p>A clear pathway from first conversation to interview. You will learn how to source openings, present your skills, perform in interviews and get hired. We share role leads when available and coach you through the process.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-number">04</div>
+                    <div class="feature-icon">🏆</div>
+                    <h3>Elite Coaching</h3>
+                    <div class="feature-badge">Expert support every step</div>
+                    <p>You're not doing this alone. Join weekly live calls with coaches who've been exactly where you are and know how to get you results. Get hands-on feedback, fix your mistakes fast, and stay on track with expert support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tagline">SUCCESS STORIES</p>
+                <h2 class="section-title">Real Results from Real People</h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="video-placeholder">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="testimonial-text">
+                        <p>Before Growth Bloc, Nathan had no direction. Now, he's earning online, building discipline, and surrounded by a community that <strong>pushes him to win</strong>.</p>
+                        <p class="testimonial-author">— Nathan K., Setter</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="video-placeholder">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="testimonial-text">
+                        <p>Dylan didn't just learn appointment setting — he gained the <strong>freedom</strong> to complete a bucket-list trip to Japan and travel the world. Growth Bloc opened doors he never knew existed.</p>
+                        <p class="testimonial-author">— Dylan M., Remote Closer</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="video-placeholder">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="testimonial-text">
+                        <p>Sarah went from zero sales experience to <strong>closing high-ticket deals in 90 days</strong>. The coaching and accountability transformed her career.</p>
+                        <p class="testimonial-author">— Sarah T., High-Ticket Closer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta-section">
+        <div class="cta-content">
+            <h2>
+                <span class="fade">Launch your</span> <span class="highlight">remote sales career</span><br>
+                <span class="fade">in ninety days</span>
+            </h2>
+            <p>Live coaching with a clear step-by-step pathway that makes you interview ready for remote setter and closer roles</p>
+            <a href="#book" class="cta-button">Book Your Call Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>GROWTH BLOC</h3>
+                    <p>For the Few Who Move the Many</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#testimonials">Success Stories</a>
+                    <a href="#cta">Apply</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Growth Bloc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            const navbar = document.querySelector('.navbar');
+
+            if (hamburger) {
+                hamburger.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    this.classList.toggle('active');
+                });
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    if (hamburger) {
+                        hamburger.classList.remove('active');
+                    }
+                });
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const offset = 100;
+                        const targetPosition = target.offsetTop - offset;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.feature-card, .testimonial-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(50px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+
+            // Video placeholder interaction
+            document.querySelectorAll('.video-placeholder').forEach(placeholder => {
+                placeholder.addEventListener('click', function() {
+                    alert('Replace this with your actual video embed code!');
+                });
+            });
+
+            // Parallax effect on scroll
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('.hero-content');
+                parallaxElements.forEach(el => {
+                    el.style.transform = `translateY(${scrolled * 0.3}px)`;
+                    el.style.opacity = 1 - scrolled / 800;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
