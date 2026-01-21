@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Choose your path to success">
+    <title>Growth Bloc - Choose Your Path</title>
+    <link rel="stylesheet" href="css/qualifier-styles.css">
+</head>
+<body>
+    <div class="qualifier-container">
+        <div class="background-image"></div>
+
+        <div class="content">
+            <div class="logo-section">
+                <svg class="icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 10 L90 50 L50 90 L10 50 Z" fill="white"/>
+                </svg>
+            </div>
+
+            <h1 class="main-question">Are You a Sales Rep or Business Owner?</h1>
+
+            <p class="subtitle">Choose your path to success</p>
+
+            <div class="button-container">
+                <button class="choice-btn sales-rep-btn" onclick="navigateToPath('sales-rep')">
+                    <span class="btn-label">Sales Rep</span>
+                    <span class="btn-description">Master high-ticket sales & achieve freedom</span>
+                </button>
+
+                <button class="choice-btn business-owner-btn" onclick="navigateToPath('business-owner')">
+                    <span class="btn-label">Business Owner</span>
+                    <span class="btn-description">Grow your business & scale your team</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/qualifier.js"></script>
+</body>
+</html>
