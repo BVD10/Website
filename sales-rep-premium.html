@@ -209,13 +209,88 @@
             position: relative;
         }
 
+        .hero-video-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 255, 0, 0.2);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-video-placeholder {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .hero-video-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(212, 255, 0, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .hero-video-placeholder:hover::before {
+            opacity: 1;
+        }
+
+        .hero-video-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hero-play-button {
+            width: 90px;
+            height: 90px;
+            background: var(--accent-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--bg-dark);
+            transition: all 0.3s;
+            padding-left: 8px;
+        }
+
+        .hero-video-placeholder:hover .hero-play-button {
+            transform: scale(1.15);
+            box-shadow: 0 15px 50px rgba(212, 255, 0, 0.5);
+        }
+
+        .hero-video-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
         .hero-tagline {
             font-size: 1rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--text-gray);
             margin-bottom: 2rem;
-            animation: fadeInUp 1s ease;
+            animation: fadeInUp 1s ease 0.2s backwards;
         }
 
         .hero-title {
@@ -224,7 +299,7 @@
             margin-bottom: 2rem;
             line-height: 1;
             letter-spacing: -3px;
-            animation: fadeInUp 1s ease 0.2s backwards;
+            animation: fadeInUp 1s ease 0.4s backwards;
         }
 
         .hero-title .highlight {
@@ -239,7 +314,7 @@
             color: var(--text-gray);
             max-width: 700px;
             margin: 0 auto 3rem;
-            animation: fadeInUp 1s ease 0.4s backwards;
+            animation: fadeInUp 1s ease 0.6s backwards;
         }
 
         .hero-subtitle .fade {
@@ -262,7 +337,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            animation: fadeInUp 1s ease 0.6s backwards;
+            animation: fadeInUp 1s ease 0.8s backwards;
         }
 
         /* Features Section */
@@ -636,6 +711,7 @@
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
+                z-index: 1001;
             }
 
             .nav-menu {
@@ -644,15 +720,31 @@
                 top: 90px;
                 flex-direction: column;
                 background: rgba(0, 0, 0, 0.98);
-                width: 100%;
+                backdrop-filter: blur(20px);
+                width: 90%;
+                left: 50%;
+                transform: translateX(-150%);
                 text-align: center;
-                transition: 0.3s;
+                transition: transform 0.3s ease;
                 padding: 2rem 0;
                 border-radius: 20px;
+                border: 1px solid rgba(212, 255, 0, 0.2);
             }
 
             .nav-menu.active {
-                left: 0;
+                transform: translateX(-50%);
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
             }
 
             .navbar {
@@ -737,7 +829,17 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <p class="hero-tagline">FOR THE FEW WHO MOVE THE MANY</p>
+            <!-- Hero Video Placeholder -->
+            <div class="hero-video-container">
+                <div class="hero-video-placeholder">
+                    <div class="hero-video-content">
+                        <div class="hero-play-button">▶</div>
+                        <p class="hero-video-label">Watch the story</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="hero-tagline">ELITE REMOTE SALES TRAINING</p>
             <h1 class="hero-title">
                 Level Up and<br>
                 <span class="highlight">Go Remote</span>
@@ -854,7 +956,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>GROWTH BLOC</h3>
-                    <p>For the Few Who Move the Many</p>
+                    <p>Your path to remote sales mastery</p>
                 </div>
                 <div class="footer-links">
                     <a href="#home">Home</a>
@@ -941,7 +1043,7 @@
             });
 
             // Video placeholder interaction
-            document.querySelectorAll('.video-placeholder').forEach(placeholder => {
+            document.querySelectorAll('.video-placeholder, .hero-video-placeholder').forEach(placeholder => {
                 placeholder.addEventListener('click', function() {
                     alert('Replace this with your actual video embed code!');
                 });
