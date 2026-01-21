@@ -64,6 +64,8 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         body {
@@ -72,6 +74,7 @@
             color: var(--text-white);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
 
         .container {
@@ -85,12 +88,13 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             z-index: -1;
             background: linear-gradient(135deg, #000000 0%, #0a0a1a 25%, #000000 50%, #1a0a1a 75%, #000000 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
+            overflow: hidden;
         }
 
         .animated-bg::before {
@@ -100,6 +104,8 @@
             left: 0;
             right: 0;
             bottom: 0;
+            width: 100%;
+            height: 100%;
             background-image: radial-gradient(circle at 20% 50%, rgba(212, 255, 0, 0.03) 0%, transparent 50%),
                               radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.03) 0%, transparent 50%);
             animation: float 8s ease-in-out infinite;
@@ -796,6 +802,16 @@
         }
 
         @media (max-width: 768px) {
+            * {
+                max-width: 100vw;
+            }
+
+            body, html {
+                overflow-x: hidden;
+                width: 100%;
+                position: relative;
+            }
+
             .hamburger {
                 display: flex;
                 z-index: 1001;
@@ -887,6 +903,16 @@
             .sticky-cta-button {
                 padding: 0.8rem 1.5rem;
                 font-size: 0.9rem;
+            }
+
+            .hero, .features, .mid-cta, .testimonials, .cta-section {
+                overflow-x: hidden;
+                width: 100%;
+            }
+
+            .container {
+                max-width: 100%;
+                overflow-x: hidden;
             }
         }
 
