@@ -804,13 +804,17 @@
         @media (max-width: 768px) {
             * {
                 max-width: 100vw;
-                margin-left: 0 !important;
-                margin-right: auto !important;
             }
 
             *::before,
             *::after {
                 max-width: 100vw;
+            }
+
+            /* Apply margin resets to most elements but exclude centered content */
+            body, html, section, div:not(.hero-video-content):not(.hero-play-button):not(.play-button),
+            header, footer, nav, article, aside, main {
+                margin-left: 0 !important;
             }
 
             body, html {
@@ -1037,19 +1041,6 @@
             * {
                 border-left: none !important;
                 border-right: none !important;
-            }
-
-            /* Fix centering for play buttons and video content */
-            .hero-video-content,
-            .hero-play-button,
-            .play-button {
-                margin-left: auto !important;
-                margin-right: auto !important;
-            }
-
-            .hero-video-content {
-                left: 50% !important;
-                transform: translate(-50%, -50%) !important;
             }
         }
 
