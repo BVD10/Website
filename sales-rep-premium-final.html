@@ -287,33 +287,37 @@
             background: #000;
         }
 
-        .unmute-button {
+        .video-controls {
             position: absolute;
             bottom: 20px;
             right: 20px;
-            width: 70px;
-            height: 70px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .video-control-btn {
+            width: 60px;
+            height: 60px;
             background: var(--accent-yellow);
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            z-index: 100;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(212, 255, 0, 0.4);
-            animation: pulse 2s ease-in-out infinite;
         }
 
-        .unmute-button:hover {
+        .video-control-btn:hover {
             transform: scale(1.1);
             box-shadow: 0 15px 40px rgba(212, 255, 0, 0.6);
         }
 
-        .unmute-button.hidden {
-            display: none;
+        .video-control-btn.pulsing {
+            animation: pulse 2s ease-in-out infinite;
         }
 
         @keyframes pulse {
@@ -1088,13 +1092,14 @@
         <div class="hero-content">
             <!-- Hero Video -->
             <div class="hero-video-container">
-                <video id="heroVideo" autoplay muted loop playsinline preload="metadata">
+                <video id="heroVideo" autoplay muted loop playsinline preload="auto">
                     <source src="https://storage.googleapis.com/msgsndr/17xe99ptfiUaQLPeSH4l/media/688fe15ce89799007eb44056.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <button class="unmute-button" id="unmuteBtn">
-                    🔊
-                </button>
+                <div class="video-controls">
+                    <button class="video-control-btn" id="playPauseBtn">⏸️</button>
+                    <button class="video-control-btn pulsing" id="muteBtn">🔇</button>
+                </div>
             </div>
 
             <p class="hero-tagline">ELITE REMOTE SALES TRAINING</p>
@@ -1281,36 +1286,42 @@
                 }
             });
 
-            // Unmute button functionality
+            // Video controls functionality
             const heroVideo = document.getElementById('heroVideo');
-            const unmuteBtn = document.getElementById('unmuteBtn');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const muteBtn = document.getElementById('muteBtn');
 
-            if (heroVideo && unmuteBtn) {
-                unmuteBtn.addEventListener('click', function() {
-                    if (heroVideo.muted) {
-                        heroVideo.muted = false;
-                        unmuteBtn.textContent = '🔊';
-                        unmuteBtn.classList.add('hidden');
+            if (heroVideo && playPauseBtn && muteBtn) {
+                // Play/Pause button
+                playPauseBtn.addEventListener('click', function() {
+                    if (heroVideo.paused) {
+                        heroVideo.play();
+                        playPauseBtn.textContent = '⏸️';
+                    } else {
+                        heroVideo.pause();
+                        playPauseBtn.textContent = '▶️';
                     }
                 });
 
-                // Hide button after 5 seconds if not clicked
-                setTimeout(function() {
+                // Mute/Unmute button
+                muteBtn.addEventListener('click', function() {
                     if (heroVideo.muted) {
-                        unmuteBtn.style.animation = 'fadeOut 0.5s ease forwards';
-                        setTimeout(() => unmuteBtn.classList.add('hidden'), 500);
+                        heroVideo.muted = false;
+                        muteBtn.textContent = '🔊';
+                        muteBtn.classList.remove('pulsing');
+                    } else {
+                        heroVideo.muted = true;
+                        muteBtn.textContent = '🔇';
+                        muteBtn.classList.add('pulsing');
                     }
-                }, 5000);
-            }
+                });
 
-            // Add fadeOut animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fadeOut {
-                    to { opacity: 0; transform: scale(0.8); }
-                }
-            `;
-            document.head.appendChild(style);
+                // Auto-play attempt with sound (will fall back to muted if blocked)
+                heroVideo.play().catch(function() {
+                    // If autoplay with sound fails, it will remain muted
+                    console.log('Autoplay with sound blocked, playing muted');
+                });
+            }
 
             // Smooth scroll
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
