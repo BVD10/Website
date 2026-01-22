@@ -1261,8 +1261,24 @@
             const playOverlay = document.getElementById('playOverlay');
 
             if (heroVideo && playOverlay) {
+                // Force video to load and display first frame
+                heroVideo.load();
+
+                // When metadata is loaded, seek to first frame
+                heroVideo.addEventListener('loadedmetadata', function() {
+                    heroVideo.currentTime = 0.1;
+                });
+
+                // Ensure first frame displays on mobile
+                heroVideo.addEventListener('loadeddata', function() {
+                    if (heroVideo.paused) {
+                        heroVideo.currentTime = 0.1;
+                    }
+                });
+
                 // Click overlay to play video
                 playOverlay.addEventListener('click', function() {
+                    heroVideo.currentTime = 0; // Reset to start
                     heroVideo.play();
                     playOverlay.classList.add('hidden');
                 });
