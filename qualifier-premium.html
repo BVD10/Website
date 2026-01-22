@@ -96,13 +96,15 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
             z-index: 1;
             background: linear-gradient(135deg, #000000 0%, #0a0a1a 25%, #000000 50%, #1a0a1a 75%, #000000 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             overflow: hidden;
+            will-change: background-position;
         }
 
         .animated-bg::before {
@@ -160,12 +162,12 @@
         .qualifier-container {
             position: relative;
             width: 100%;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10;
-            overflow: hidden;
+            padding: 40px 0;
         }
 
         /* Content */
@@ -376,6 +378,10 @@
 
         /* Desktop Optimization */
         @media (min-width: 1440px) {
+            .qualifier-container {
+                padding: 80px 0;
+            }
+
             .content {
                 max-width: 700px;
                 padding: 60px 40px;
@@ -436,12 +442,22 @@
         }
 
         @media (max-width: 768px) {
+            /* Ensure gradient animation works on mobile */
+            .animated-bg {
+                background: linear-gradient(135deg, #000000 0%, #0a0a1a 25%, #000000 50%, #1a0a1a 75%, #000000 100%);
+                background-size: 400% 400%;
+                animation: gradientShift 15s ease infinite;
+                -webkit-animation: gradientShift 15s ease infinite;
+            }
+
             /* Keep animations but reduce intensity for mobile performance */
             .orb-1, .orb-2, .orb-3 {
                 width: 250px;
                 height: 250px;
                 filter: blur(40px);
-                opacity: 0.3;
+                opacity: 0.35;
+                display: block;
+                will-change: transform;
             }
 
             .main-question {
@@ -480,6 +496,10 @@
 
             .button-container {
                 gap: 1.5rem;
+            }
+
+            .qualifier-container {
+                padding: 60px 0;
             }
         }
 
@@ -536,21 +556,30 @@
                 padding: 0.4rem 1.2rem;
             }
 
+            /* Ensure animations are visible on small screens */
+            .animated-bg {
+                background: linear-gradient(135deg, #000000 0%, #0a0a1a 25%, #000000 50%, #1a0a1a 75%, #000000 100%);
+                background-size: 400% 400%;
+                animation: gradientShift 20s ease infinite;
+                -webkit-animation: gradientShift 20s ease infinite;
+            }
+
             /* Reduce orb size and blur for small mobile screens */
             .orb-1, .orb-2, .orb-3 {
                 width: 200px;
                 height: 200px;
                 filter: blur(30px);
-                opacity: 0.25;
-            }
-
-            /* Slower animations on mobile for better performance */
-            .animated-bg {
-                animation-duration: 20s;
+                opacity: 0.3;
+                display: block;
             }
 
             .orb {
                 animation-duration: 30s;
+                -webkit-animation-duration: 30s;
+            }
+
+            .qualifier-container {
+                padding: 40px 0;
             }
         }
     </style>
