@@ -275,87 +275,14 @@
             border: 1px solid rgba(212, 255, 0, 0.2);
             animation: fadeInUp 1s ease;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            aspect-ratio: 16 / 9;
-        }
-
-        .hero-video-container::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            border: 4px solid rgba(212, 255, 0, 0.2);
-            border-top-color: var(--accent-yellow);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .hero-video-container.loading::before {
-            opacity: 1;
-        }
-
-        @keyframes spin {
-            to { transform: translate(-50%, -50%) rotate(360deg); }
+            background: #000;
         }
 
         .hero-video-container video {
-            position: relative;
             width: 100%;
-            height: 100%;
+            height: auto;
             display: block;
-            object-fit: cover;
-            background: transparent;
-            z-index: 2;
-        }
-
-        .video-controls {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            gap: 15px;
-            z-index: 100;
-        }
-
-        .video-control-btn {
-            width: 60px;
-            height: 60px;
-            background: var(--accent-yellow);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(212, 255, 0, 0.4);
-        }
-
-        .video-control-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(212, 255, 0, 0.6);
-        }
-
-        .video-control-btn.pulsing {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 10px 30px rgba(212, 255, 0, 0.4);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 15px 40px rgba(212, 255, 0, 0.6);
-            }
+            background: #000;
         }
 
         .hero-tagline {
@@ -1118,15 +1045,11 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <!-- Hero Video -->
-            <div class="hero-video-container loading" id="videoContainer">
-                <video id="heroVideo" autoplay muted loop playsinline preload="auto">
+            <div class="hero-video-container">
+                <video id="heroVideo" controls loop playsinline preload="metadata">
                     <source src="https://storage.googleapis.com/msgsndr/17xe99ptfiUaQLPeSH4l/media/688fe15ce89799007eb44056.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <div class="video-controls">
-                    <button class="video-control-btn" id="playPauseBtn" title="Pause/Play">⏸️</button>
-                    <button class="video-control-btn pulsing" id="muteBtn" title="Mute/Unmute">🔇</button>
-                </div>
             </div>
 
             <p class="hero-tagline">ELITE REMOTE SALES TRAINING</p>
@@ -1313,75 +1236,6 @@
                 }
             });
 
-            // Video controls functionality
-            const heroVideo = document.getElementById('heroVideo');
-            const videoContainer = document.getElementById('videoContainer');
-            const playPauseBtn = document.getElementById('playPauseBtn');
-            const muteBtn = document.getElementById('muteBtn');
-
-            if (heroVideo && playPauseBtn && muteBtn && videoContainer) {
-                // Remove loading spinner when video has loaded enough to show first frame
-                heroVideo.addEventListener('loadeddata', function() {
-                    videoContainer.classList.remove('loading');
-                });
-
-                // Also try to remove on first frame
-                heroVideo.addEventListener('loadedmetadata', function() {
-                    setTimeout(function() {
-                        videoContainer.classList.remove('loading');
-                    }, 100);
-                });
-
-                // Update button states when video plays/pauses
-                heroVideo.addEventListener('play', function() {
-                    playPauseBtn.textContent = '⏸️';
-                });
-
-                heroVideo.addEventListener('pause', function() {
-                    playPauseBtn.textContent = '▶️';
-                });
-
-                // Play/Pause button - simpler approach
-                playPauseBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    try {
-                        if (heroVideo.paused) {
-                            heroVideo.play();
-                        } else {
-                            heroVideo.pause();
-                        }
-                    } catch (error) {
-                        console.log('Play/Pause error:', error);
-                    }
-                });
-
-                // Mute/Unmute button
-                muteBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    heroVideo.muted = !heroVideo.muted;
-
-                    if (heroVideo.muted) {
-                        muteBtn.textContent = '🔇';
-                        muteBtn.classList.add('pulsing');
-                    } else {
-                        muteBtn.textContent = '🔊';
-                        muteBtn.classList.remove('pulsing');
-                    }
-                });
-
-                // Ensure video starts playing
-                setTimeout(function() {
-                    if (heroVideo.paused) {
-                        heroVideo.play().catch(function(error) {
-                            console.log('Autoplay blocked:', error);
-                        });
-                    }
-                }, 100);
-            }
 
             // Smooth scroll
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
