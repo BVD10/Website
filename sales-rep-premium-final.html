@@ -786,6 +786,67 @@
             font-size: 0.9rem;
         }
 
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .video-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 100px rgba(0, 0, 0, 0.8);
+        }
+
+        .video-modal video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .video-modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            z-index: 10001;
+        }
+
+        .video-modal-close:hover {
+            transform: scale(1.2);
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .hero-title {
@@ -1064,6 +1125,17 @@
     </style>
 </head>
 <body>
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <button class="video-modal-close" id="closeModal">&times;</button>
+        <div class="video-modal-content">
+            <video id="modalVideo" controls autoplay>
+                <source src="https://storage.googleapis.com/msgsndr/17xe99ptfiUaQLPeSH4l/media/688fe15ce89799007eb44056.mov" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
     <!-- Animated Background -->
     <div class="animated-bg"></div>
 
@@ -1328,12 +1400,44 @@
                 observer.observe(el);
             });
 
-            // Video placeholder interaction
+            // Video modal functionality
+            const videoModal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            const closeModal = document.getElementById('closeModal');
+
+            // Open video modal when clicking video placeholders
             document.querySelectorAll('.video-placeholder, .hero-video-placeholder').forEach(placeholder => {
                 placeholder.addEventListener('click', function() {
-                    // Replace this alert with your actual video embed code
-                    alert('Replace this with your actual video embed code!');
+                    videoModal.classList.add('active');
+                    modalVideo.currentTime = 0;
+                    modalVideo.play();
+                    document.body.style.overflow = 'hidden';
                 });
+            });
+
+            // Close modal button
+            closeModal.addEventListener('click', function() {
+                videoModal.classList.remove('active');
+                modalVideo.pause();
+                document.body.style.overflow = '';
+            });
+
+            // Close modal when clicking outside video
+            videoModal.addEventListener('click', function(e) {
+                if (e.target === videoModal) {
+                    videoModal.classList.remove('active');
+                    modalVideo.pause();
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                    videoModal.classList.remove('active');
+                    modalVideo.pause();
+                    document.body.style.overflow = '';
+                }
             });
 
             // Parallax effect on scroll
