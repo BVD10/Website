@@ -34,12 +34,13 @@
         height: 200px;
         border-radius: 50%;
         margin: 0 auto 40px;
-        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        background: linear-gradient(135deg, #4F9EFF, #2E7FE8);
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        border: 3px solid #1a1a1a;
+        border: 4px solid rgba(79, 158, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(79, 158, 255, 0.3);
     }
 
     .patty-profile-photo img {
@@ -55,18 +56,25 @@
     }
 
     .patty-profile-name {
-        font-size: 32px;
-        font-weight: 400;
-        color: #a0a0a0;
-        margin-bottom: 30px;
-        letter-spacing: 1px;
+        font-size: 48px;
+        font-weight: 500;
+        color: #ffffff;
+        margin-bottom: 40px;
+        letter-spacing: 2px;
     }
 
     .patty-tagline {
-        font-size: 20px;
-        color: #a0a0a0;
-        margin-bottom: 60px;
-        font-weight: 300;
+        font-size: 42px;
+        font-weight: 600;
+        background: linear-gradient(135deg, #4F9EFF 0%, #7AB4FF 50%, #4F9EFF 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 70px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-family: 'Georgia', serif;
+        text-shadow: 0 0 30px rgba(79, 158, 255, 0.3);
     }
 
     /* Social Icons */
@@ -92,8 +100,9 @@
     }
 
     .patty-social-icon:hover {
-        background-color: #3b82f6;
+        background: linear-gradient(135deg, #4F9EFF, #2E7FE8);
         transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(79, 158, 255, 0.4);
     }
 
     .patty-social-icon svg {
@@ -117,47 +126,54 @@
     }
 
     .patty-cta-button {
-        padding: 20px 40px;
+        padding: 24px 48px;
         border-radius: 50px;
-        font-size: 18px;
-        font-weight: 500;
+        font-size: 20px;
+        font-weight: 600;
         text-decoration: none;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
-        transition: all 0.3s ease;
+        gap: 12px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         cursor: pointer;
         border: 2px solid;
         position: relative;
         overflow: hidden;
+        letter-spacing: 0.5px;
     }
 
     .patty-cta-primary {
-        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        background: linear-gradient(135deg, #4F9EFF, #2E7FE8);
         color: #ffffff;
-        border-color: #3b82f6;
-        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+        border-color: transparent;
+        box-shadow: 0 8px 32px rgba(79, 158, 255, 0.5);
+        font-weight: 600;
     }
 
     .patty-cta-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 30px rgba(59, 130, 246, 0.5);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 48px rgba(79, 158, 255, 0.7);
+        background: linear-gradient(135deg, #5FA9FF, #3E8FF8);
         color: #ffffff;
         text-decoration: none;
     }
 
     .patty-cta-secondary {
         background-color: transparent;
-        color: #3b82f6;
-        border-color: #3b82f6;
+        color: #4F9EFF;
+        border-color: #4F9EFF;
+        border-width: 3px;
+        font-weight: 600;
+        box-shadow: 0 4px 20px rgba(79, 158, 255, 0.2);
     }
 
     .patty-cta-secondary:hover {
-        background-color: #3b82f6;
+        background: linear-gradient(135deg, #4F9EFF, #2E7FE8);
         color: #ffffff;
-        transform: translateY(-2px);
+        transform: translateY(-3px);
         text-decoration: none;
+        box-shadow: 0 8px 32px rgba(79, 158, 255, 0.5);
     }
 
     .patty-arrow-icon {
@@ -181,11 +197,11 @@
         }
 
         .patty-profile-name {
-            font-size: 24px;
+            font-size: 36px;
         }
 
         .patty-tagline {
-            font-size: 18px;
+            font-size: 28px;
         }
 
         .patty-social-icons {
@@ -214,10 +230,12 @@
     <div class="patty-container">
         <!-- Profile Section -->
         <div class="patty-profile-section">
-            <!-- Profile Photo - Replace with actual image -->
+            <!-- Profile Photo -->
+            <!-- INSTRUCTIONS: Upload your photo to GoHighLevel Media Library, copy the URL, and paste it below -->
             <div class="patty-profile-photo">
+                <!-- STEP 1: Delete the line below (the placeholder P) -->
                 <div class="patty-profile-placeholder">P</div>
-                <!-- When you have the image, replace the placeholder div above with: -->
+                <!-- STEP 2: Remove the comment tags from the line below and add your image URL -->
                 <!-- <img src="YOUR_IMAGE_URL_HERE" alt="Patty"> -->
             </div>
 
