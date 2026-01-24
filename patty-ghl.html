@@ -23,24 +23,10 @@
         margin: 0 auto;
     }
 
-    /* Logo */
-    .patty-logo {
-        text-align: center;
-        padding: 40px 0 60px;
-    }
-
-    .patty-logo-text {
-        font-size: 48px;
-        font-weight: 700;
-        letter-spacing: 8px;
-        color: #ffffff;
-        font-family: 'Georgia', serif;
-    }
-
     /* Profile Section */
     .patty-profile-section {
         text-align: center;
-        padding: 40px 20px;
+        padding: 80px 20px 40px;
     }
 
     .patty-profile-photo {
@@ -74,22 +60,6 @@
         color: #a0a0a0;
         margin-bottom: 30px;
         letter-spacing: 1px;
-    }
-
-    .patty-hero-title {
-        font-size: 48px;
-        font-weight: 300;
-        color: #ffffff;
-        margin-bottom: 20px;
-        line-height: 1.2;
-        font-family: 'Georgia', serif;
-    }
-
-    .patty-hero-subtitle {
-        font-size: 28px;
-        font-weight: 300;
-        color: #ffffff;
-        margin-bottom: 50px;
     }
 
     .patty-tagline {
@@ -199,46 +169,8 @@
         transform: translateX(5px);
     }
 
-    /* YouTube Section */
-    .patty-youtube-section {
-        padding: 60px 20px;
-        text-align: center;
-    }
-
-    .patty-youtube-title {
-        font-size: 42px;
-        font-weight: 300;
-        color: #ffffff;
-        margin-bottom: 40px;
-        font-family: 'Georgia', serif;
-    }
-
-    .patty-video-placeholder {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-        border-radius: 12px;
-        overflow: hidden;
-        background: linear-gradient(135deg, #1a1a1a, #2563eb);
-        aspect-ratio: 16 / 9;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .patty-video-placeholder img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
     /* Responsive */
     @media (max-width: 768px) {
-        .patty-logo-text {
-            font-size: 36px;
-            letter-spacing: 4px;
-        }
-
         .patty-profile-photo {
             width: 160px;
             height: 160px;
@@ -250,14 +182,6 @@
 
         .patty-profile-name {
             font-size: 24px;
-        }
-
-        .patty-hero-title {
-            font-size: 36px;
-        }
-
-        .patty-hero-subtitle {
-            font-size: 22px;
         }
 
         .patty-tagline {
@@ -277,42 +201,17 @@
             padding: 18px 30px;
             font-size: 16px;
         }
-
-        .patty-youtube-title {
-            font-size: 32px;
-        }
     }
 
     @media (max-width: 480px) {
-        .patty-logo {
-            padding: 30px 0 40px;
-        }
-
-        .patty-hero-title {
-            font-size: 28px;
-        }
-
-        .patty-hero-subtitle {
-            font-size: 20px;
-        }
-
         .patty-social-icons {
             gap: 20px;
-        }
-
-        .patty-youtube-title {
-            font-size: 28px;
         }
     }
 </style>
 
 <div class="patty-landing">
     <div class="patty-container">
-        <!-- Logo -->
-        <div class="patty-logo">
-            <div class="patty-logo-text">P</div>
-        </div>
-
         <!-- Profile Section -->
         <div class="patty-profile-section">
             <!-- Profile Photo - Replace with actual image -->
@@ -323,9 +222,6 @@
             </div>
 
             <h1 class="patty-profile-name">Patty</h1>
-
-            <h2 class="patty-hero-title">Crypto Trader & Investor</h2>
-            <h3 class="patty-hero-subtitle">Since 2017</h3>
 
             <p class="patty-tagline">Trading for r*tards</p>
 
@@ -364,18 +260,6 @@
                     Join the signals chat
                     <span class="patty-arrow-icon">→</span>
                 </a>
-            </div>
-        </div>
-
-        <!-- YouTube Section -->
-        <div class="patty-youtube-section">
-            <h2 class="patty-youtube-title">Watch me on Youtube</h2>
-            <div class="patty-video-placeholder">
-                <!-- Replace with actual video embed or thumbnail image -->
-                <div style="color: #a0a0a0; font-size: 18px;">Video thumbnail coming soon</div>
-                <!-- Or use an image: <img src="YOUR_VIDEO_THUMBNAIL_URL" alt="YouTube Video"> -->
-                <!-- Or embed a YouTube video: -->
-                <!-- <iframe width="100%" height="100%" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
             </div>
         </div>
     </div>
